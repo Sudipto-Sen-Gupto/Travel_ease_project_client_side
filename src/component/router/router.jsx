@@ -6,6 +6,8 @@ import Allvehicles from '../../pages/Allvehicles/Allvehicles';
 import Addvehicles from '../../pages/Addvehicles/Addvehicles';
 import Myvehicles from '../../pages/Myvehicles/Myvehicles';
 import Mybooks from '../../pages/Mybooks.jsx/Mybooks';
+import Login from '../Login/Login';
+import Register from '../register/Register';
 
  export const router = createBrowserRouter([
     {
@@ -31,7 +33,15 @@ import Mybooks from '../../pages/Mybooks.jsx/Mybooks';
             {
                 path:'/mybook',
                 element:<Mybooks></Mybooks>
-            }
+            },
+    {
+        path:'/login',
+        Component:Login
+    },
+    {
+        path:'/register',
+        Component:Register
+    }
         ]
     }
 ])
