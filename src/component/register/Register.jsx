@@ -1,7 +1,9 @@
 import { Eye, EyeOff } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
+import { AuthContext } from '../authprovider/Authprovider';
 
 const Register = () => {
+  const {signUpWithUser}=use(AuthContext)
     const [show,setShow]=useState(false)
     const handleSubmit=(e)=>{
         e.preventDefault();
@@ -10,6 +12,7 @@ const Register = () => {
         const email=e.target.email.value;
         const pass = e.target.email.value;
         // console.log({name,photoUrl,email,pass});
+        signUpWithUser(email,pass).then(res=>console.log(res.user)).catch(err=>alert(err.message))
     }
     return (
         <div>
@@ -35,7 +38,7 @@ const Register = () => {
           <div className='relative'>
             <label className="label">Password</label>
           <input type={show?'text':'password'} className="input" placeholder="Password" name='pass' />
-          <button className='absolute top-6 right-6' onClick={()=>setShow(!show)}>{show? <Eye />: <EyeOff />}</button>
+          <p className='absolute top-6 right-6' onClick={()=>setShow(!show)}>{show? <Eye />: <EyeOff />}</p>
           </div>
          
           <button className="btn btn-neutral mt-4">Sign Up</button>
