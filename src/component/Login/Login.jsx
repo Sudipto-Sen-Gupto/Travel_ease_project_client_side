@@ -1,10 +1,12 @@
 import { Eye, EyeOff } from 'lucide-react';
 import React, { use, useState } from 'react';
 import { AuthContext } from '../authprovider/Authprovider';
+import { useLocation, useNavigate } from 'react-router';
 
 const Login = () => {
-     
-  const {signWithGoogle}=use(AuthContext)
+     const navigate=useNavigate();
+     const location=useLocation();
+  const {signWithGoogle,signinWithUser}=use(AuthContext)
 
 
     const [show,setShow]=useState(false)
@@ -12,16 +14,31 @@ const Login = () => {
         e.preventDefault();
         const email=e.target.email.value;
         const pass=e.target.pass.value;
-        console.log({email,pass});
+        // console.log({email,pass});
+         
+        signinWithUser(email,pass).then(res=>{console.log(res)
+
+               navigate(`${location.state?location.state:'/'}`)
+               
+        }).catch(err=>console.log(err))
+       
     }
    
     const handleGoogleClick=()=>{
-      signWithGoogle().then(res=>console.log(res)).catch(err=>console.log(err))
+      signWithGoogle().then(res=>{console.log(res)
+
+          navigate(`${location.state?location.state:'/'}`)
+
+      }).catch(err=>console.log(err))
+      
+     
 
     }
      
     return (
-        <div>
+        <div >
+
+
             <div className="hero bg-base-200 min-h-screen">
   <div className="hero-content flex-col lg:flex-row-reverse">
     <div className="text-center lg:text-left">

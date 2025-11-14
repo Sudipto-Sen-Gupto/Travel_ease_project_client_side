@@ -1,10 +1,13 @@
 import { Eye, EyeOff } from 'lucide-react';
 import React, { use, useState } from 'react';
 import { AuthContext } from '../authprovider/Authprovider';
+import { useNavigate } from 'react-router';
 
 const Register = () => {
   const {signUpWithUser}=use(AuthContext)
     const [show,setShow]=useState(false)
+   const navigate=useNavigate();
+
     const handleSubmit=(e)=>{
         e.preventDefault();
         const name=e.target.name.value;
@@ -12,7 +15,12 @@ const Register = () => {
         const email=e.target.email.value;
         const pass = e.target.email.value;
         // console.log({name,photoUrl,email,pass});
-        signUpWithUser(email,pass).then(res=>console.log(res.user)).catch(err=>alert(err.message))
+        signUpWithUser(email,pass).then(res=>{console.log(res.user)
+              
+           navigate('/')
+
+        }).catch(err=>alert(err.message))
+       
     }
     return (
         <div>

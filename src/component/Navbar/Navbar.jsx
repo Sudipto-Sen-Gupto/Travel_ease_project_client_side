@@ -2,6 +2,7 @@ import React, { use } from 'react';
 import { Link, NavLink } from 'react-router';
 import './nav.css'
 import { AuthContext } from '../authprovider/Authprovider';
+import profile from '../../assets/user.png';
 const Navbar = () => {
 
    const {user,signout}=use(AuthContext)
@@ -13,9 +14,12 @@ const Navbar = () => {
   const list =<nav className='space-x-6'>
          <NavLink to={'/'}>Home</NavLink>
          <NavLink to={'allvehicles'}>All Vehicles</NavLink>
-         <NavLink to={'addvehicles'}>Add Vehicles</NavLink>
+         
+          <NavLink to={'addvehicles'}>Add Vehicles</NavLink>
          <NavLink to={'myvehicles'}>My Vehicles</NavLink>
          <NavLink to={'mybook'}>My Bookings</NavLink>
+         
+         
   </nav>
     return (
         <div>
@@ -39,6 +43,7 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
+    <img src={user?user.photoURL:profile} className={`w-[50px] h-[50px] rounded-full mx-2`} alt="" />
  {
   user?  <button className='btn btn-outline' onClick={handleSignOut}>Log Out</button>: <Link to={'/login'}> <button className='btn btn-outline'>Log In</button></Link>
  }
