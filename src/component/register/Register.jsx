@@ -7,8 +7,12 @@ import Googlelog from '../googleLog/Googlelog';
 
 const Register = () => {
   const {signUpWithUser}=use(AuthContext)
+
     const [show,setShow]=useState(false)
+    const [error,setError]=useState("");
+
    const navigate=useNavigate();
+
 
     const handleSubmit=(e)=>{
         e.preventDefault();
@@ -17,6 +21,26 @@ const Register = () => {
         const email=e.target.email.value;
         const pass = e.target.pass.value;
         // console.log({name,photoUrl,email,pass});
+
+        //password length validation
+          if(pass.length<6){
+            return setError("Your password should be at least Six character")
+          }
+              
+          // lowercase letter validation
+          const hasLowerCase = /^(?=.*[a-z]).+$/;
+
+          if(!hasLowerCase.test(pass)){
+            return setError("At least one lowercase letter must contain into password")
+          }
+            
+          //UPPERCASE letter validation
+          const hasUpperCase=/^(?=.*[A-Z]).+$/;
+
+          if(!hasUpperCase.test(pass)){
+                return setError("At least one UPPERCASE letter must contain into password")
+          }
+
         signUpWithUser(email,pass,name,photoUrl).then(()=>{toast("Sign Up successful")
               
            navigate('/')
@@ -50,7 +74,9 @@ const Register = () => {
           <input type={show?'text':'password'} className="input" placeholder="Password" name='pass' />
           <p className='absolute top-6 right-6' onClick={()=>setShow(!show)}>{show? <Eye />: <EyeOff />}</p>
           </div>
-         
+
+                 <p className='text-red-600'>{error} </p>
+
           <button className="btn btn-neutral mt-4">Sign Up</button>
         </fieldset>
        </form>
