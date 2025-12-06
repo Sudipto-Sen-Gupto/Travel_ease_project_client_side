@@ -1,7 +1,9 @@
 import { Eye, EyeOff } from 'lucide-react';
 import React, { use, useState } from 'react';
 import { AuthContext } from '../authprovider/Authprovider';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+import Googlelog from '../googleLog/Googlelog';
 
 const Register = () => {
   const {signUpWithUser}=use(AuthContext)
@@ -13,13 +15,13 @@ const Register = () => {
         const name=e.target.name.value;
         const photoUrl=e.target.photoUrl.value;
         const email=e.target.email.value;
-        const pass = e.target.email.value;
+        const pass = e.target.pass.value;
         // console.log({name,photoUrl,email,pass});
-        signUpWithUser(email,pass).then(res=>{console.log(res.user)
+        signUpWithUser(email,pass,name,photoUrl).then(()=>{toast("Sign Up successful")
               
            navigate('/')
 
-        }).catch(err=>alert(err.message))
+        }).catch(err=>toast(err.message))
        
     }
     return (
@@ -52,6 +54,9 @@ const Register = () => {
           <button className="btn btn-neutral mt-4">Sign Up</button>
         </fieldset>
        </form>
+       <p>Have already an account? <Link to={'/login'} className='to-blue-700 underline'>Sign in</Link></p>
+
+       <Googlelog></Googlelog>
       </div>
     </div>
   </div>

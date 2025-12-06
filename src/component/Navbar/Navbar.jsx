@@ -3,15 +3,16 @@ import { Link, NavLink } from 'react-router';
 import './nav.css'
 import { AuthContext } from '../authprovider/Authprovider';
 import profile from '../../assets/user.png';
+import { toast } from 'react-toastify';
 const Navbar = () => {
 
    const {user,signout}=use(AuthContext)
-
+   console.log(user);
    const handleSignOut=()=>{
-    signout().then(res=>console.log(res)).catch(err=>console.log(err))
+    signout().then(res=>toast("Log out successful")).catch(err=>console.log(err))
    }
 
-  const list =<nav className='space-x-6'>
+  const list =<nav className='space-x-6 flex flex-col gap-5 md:flex-row'>
          <NavLink to={'/'}>Home</NavLink>
          <NavLink to={'allvehicles'}>All Vehicles</NavLink>
          
@@ -43,7 +44,7 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <img src={user?user.photoURL:profile} className={`w-[50px] h-[50px] rounded-full mx-2`} alt="" />
+    <img src={user? user.photoURL : profile } title={`${user?user.displayName:''}`}  className={`w-[50px] h-[50px] rounded-full mx-2`} alt="" />
  {
   user?  <button className='btn btn-outline' onClick={handleSignOut}>Log Out</button>: <Link to={'/login'}> <button className='btn btn-outline'>Log In</button></Link>
  }
