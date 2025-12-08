@@ -4,6 +4,8 @@ import './nav.css'
 import { AuthContext } from '../authprovider/Authprovider';
 import profile from '../../assets/user.png';
 import { toast } from 'react-toastify';
+import Logo from '../logo/Logo';
+import img from '../../assets/Image/background.avif'
 const Navbar = () => {
 
    const {user,signout}=use(AuthContext)
@@ -24,7 +26,8 @@ const Navbar = () => {
   </nav>
     return (
         <div>
-            <div className="navbar bg-base-100 shadow-sm">
+            <div className="navbar  shadow-lg   bg-[url('src/assets/Image/background.avif')] bg-cover pb-[300px] text-white">
+              
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -36,7 +39,9 @@ const Navbar = () => {
        {list}
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">Travel Agency</a>
+            <div>
+              <Logo></Logo>
+            </div>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -44,9 +49,9 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <img src={user? user.photoURL : profile } title={`${user?user.displayName:''}`}  className={`w-[50px] h-[50px] rounded-full mx-2`} alt="" />
+    <img src={user? user.photoURL : profile } title={`${user?user.displayName:''}`}  className={`hidden md:block w-[50px] h-[50px] rounded-full mx-2 `} alt="" />
  {
-  user?  <button className='btn btn-outline' onClick={handleSignOut}>Log Out</button>: <Link to={'/login'}> <button className='btn btn-outline'>Log In</button></Link>
+  user?  <button className='btn btn-outline ' onClick={handleSignOut}>Log Out</button>: <Link to={'/login'}> <button className='btn btn-outline '>Log In</button></Link>
  }
   {
     user?'':<Link to={'/register'}> <button className='btn btn-primary'>Sign up</button></Link>
