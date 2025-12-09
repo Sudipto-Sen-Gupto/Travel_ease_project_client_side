@@ -11,14 +11,14 @@ const Login = () => {
 
     const navigate=useNavigate();
     const location=useLocation();
-    console.log(location);
+    // console.log(location);
         
      const [show,setShow]=useState(false)
       const handleLogin=(e)=>{
              e.preventDefault();
              const email= e.target.email.value;
              const pass=e.target.pass.value;
-             console.log(email,pass);
+            //  console.log(email,pass);
 
              userLogin(email,pass).then(()=>{
                 toast("log in successfully")

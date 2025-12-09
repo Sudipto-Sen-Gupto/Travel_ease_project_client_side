@@ -9,6 +9,8 @@ import Mybooks from '../../pages/Mybooks.jsx/Mybooks';
 import Login from '../Login/Login';
 import Register from '../register/Register';
 import Privateroute from '../privaterouter/Privateroute';
+import ViewDetails from '../../pages/viewDetailsPage/ViewDetails';
+
 
  export const router = createBrowserRouter([
     {
@@ -20,27 +22,32 @@ import Privateroute from '../privaterouter/Privateroute';
                 Component:Homepage
             },
             {
-                path:'/allvehicles',
+                path:'allvehicles',
                 Component:Allvehicles
             },
             {
-                path:'/addvehicles',
+                path:'addvehicles',
                 element: <Privateroute><Addvehicles></Addvehicles></Privateroute>
             },
             {
-                path:'/myvehicles',
+                path:'myvehicles',
                 element: <Privateroute><Myvehicles></Myvehicles></Privateroute>
             },
             {
-                path:'/mybook',
+                path:'mybook',
                 element: <Privateroute><Mybooks></Mybooks></Privateroute>
             },
+            {
+                path:'viewdetails/:id',
+               
+                element:<Privateroute> <ViewDetails></ViewDetails>  </Privateroute>
+            },
     {
-        path:'/login',
+        path:'login',
         Component:Login
     },
     {
-        path:'/register',
+        path:'register',
         Component:Register
     }
         ]

@@ -7,15 +7,17 @@ export const AuthContext=createContext();
 const Authprovider = ({children}) => {
    
     const [user,setUser]=useState(null);
-
+     const [loader,setLoader]=useState(true)
  const googleProvider=new GoogleAuthProvider();
 
  const signWithGoogle=()=>{
+        setLoader(true)
     return signInWithPopup(auth,googleProvider)
  }
  
  const signUpWithUser=async(email,pass,name,photoUrl)=>{
-   console.log(email,pass);
+   // console.log(email,pass);
+  
    const createUser= await createUserWithEmailAndPassword(auth,email,pass);
 
    updateProfile(auth.currentUser,{
@@ -23,6 +25,7 @@ const Authprovider = ({children}) => {
       displayName:name,
       photoURL:photoUrl
    })
+         setLoader(true)
    return createUser;
  }
 
@@ -34,6 +37,7 @@ const Authprovider = ({children}) => {
  useEffect(()=>{
    const unsubscriber= onAuthStateChanged(auth,(currentUser)=>{
               setUser(currentUser);
+              setLoader(false)
    })
    return ()=>{
     unsubscriber()
@@ -41,6 +45,7 @@ const Authprovider = ({children}) => {
  },[])
 
  const signout=()=>{
+   setLoader(true)
     return signOut(auth);
  }
    const userInfo={
@@ -48,7 +53,8 @@ const Authprovider = ({children}) => {
             user,
             signout,
             signUpWithUser,
-            userLogin
+            userLogin,
+            loader
             
    }
 

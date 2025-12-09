@@ -5,7 +5,7 @@ import { AuthContext } from '../authprovider/Authprovider';
 import profile from '../../assets/user.png';
 import { toast } from 'react-toastify';
 import Logo from '../logo/Logo';
-import img from '../../assets/Image/background.avif'
+
 const Navbar = () => {
 
    const {user,signout}=use(AuthContext)
