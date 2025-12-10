@@ -81,7 +81,7 @@ const ViewDetails = () => {
       {/* Description */}
       <div className="mt-6">
         <h2 className="text-xl font-semibold mb-2">Vehicle Description</h2>
-        <p className="text-gray-600 leading-relaxed">{vehicle.description}</p>
+        <p className="text-gray-600 leading-relaxed text-justify">{vehicle.description}</p>
       </div>
 
       {/* Book Button */}

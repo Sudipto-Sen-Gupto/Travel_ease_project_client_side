@@ -2,10 +2,11 @@ import React from 'react';
 import Useaxios from '../../customhook/Useaxios';
 import { useQuery } from '@tanstack/react-query';
 import Homedatum from '../../component/homeData/Homedatum';
+import { AuthContext } from '../../component/authprovider/Authprovider';
 
 const Allvehicles = () => {
 
-    const axiosInstance=Useaxios();
+    const axiosInstance=Useaxios(AuthContext);
 
     const {data:property=[]}=useQuery({
         queryKey: ['property'],
