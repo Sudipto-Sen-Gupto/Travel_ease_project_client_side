@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useParams } from 'react-router';
 import Useaxios from '../../customhook/Useaxios';
+import Swal from 'sweetalert2';
 
 const ViewDetails = () => {
      const axiosInstance=Useaxios();
@@ -12,9 +13,38 @@ const ViewDetails = () => {
         queryFn:async()=>{
             const res=await axiosInstance.get(`/viewdetail/${id}`)
             console.log(res.data);
-            return res.data
+            return res.data;
         }
     })
+
+    const handleClick=()=>{
+                        
+                  const vehicleDetail={
+                                 
+                       vehicleName:vehicle.vehicleName,
+                       ownerName:vehicle.ownerName,
+                       category:vehicle.category,
+                       rating:vehicle.rating,
+                       pricePerDay:vehicle.pricePerDay,
+                       owner:vehicle.owner,
+                       transmission:vehicle.transmission,
+                       seats:vehicle.seats,
+                       availability:vehicle.availability,
+                       description:vehicle.description
+                  }
+
+                  axiosInstance.post('/vehicleDetail',vehicleDetail).then(res=>{
+                          console.log(res.data);
+                          if(res.data.insertedId){
+                             Swal.fire({
+                              title: "Vehicle booking is completed!",
+                                 icon: "success",
+                                  draggable: true,
+                                  timer:1500
+                                       });
+                          }
+                  })
+    }
     return (
         <div className='p-6'>
 
@@ -86,7 +116,7 @@ const ViewDetails = () => {
 
       {/* Book Button */}
       <div className="text-center mt-8">
-        <button className="btn btn-primary px-10 py-3 text-lg rounded-lg">
+        <button className="btn btn-primary px-10 py-3 text-lg rounded-lg" onClick={handleClick}>
           🚗 Book Now
         </button>
       </div>

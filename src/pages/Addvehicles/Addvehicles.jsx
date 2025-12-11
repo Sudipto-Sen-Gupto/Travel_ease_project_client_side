@@ -4,6 +4,7 @@ import image2 from '../../assets/homepage_pic/gettyimages-2234313553-1024x1024.j
 import { AuthContext } from '../../component/authprovider/Authprovider';
 import axios from 'axios';
 import Useaxios from '../../customhook/Useaxios';
+import Swal from 'sweetalert2';
 const Addvehicles = () => {
 
     const {user}=use(AuthContext);
@@ -26,7 +27,18 @@ const Addvehicles = () => {
         console.log(vehicleInfo);
 
           axiosInstance.post('/addvehicle',vehicleInfo).then(res=>{
-            console.log(res);
+            console.log(res.data);
+
+            if(res.data.insertedId){
+                        
+                Swal.fire({
+                 title: "Vehicle Added Successfully!",
+                  icon: "success",
+                    draggable: true,
+                    timer:1500
+                       });
+            }
+           
           }).catch(err=>console.log(err.message))
     }
     
