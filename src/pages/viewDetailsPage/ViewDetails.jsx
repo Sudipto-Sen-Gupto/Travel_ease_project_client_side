@@ -1,15 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { use } from 'react';
 import { useParams } from 'react-router';
 import Useaxios from '../../customhook/Useaxios';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../component/authprovider/Authprovider';
 
 const ViewDetails = () => {
      const axiosInstance=Useaxios();
     const {id}=useParams();
+    const {user}=use(AuthContext)
     // console.log(id);
     const {data:vehicle={}}=useQuery({
-        queryKey:['viewdetail',id],
+        queryKey:['viewdetail',id,user.email],
         queryFn:async()=>{
             const res=await axiosInstance.get(`/viewdetail/${id}`)
             console.log(res.data);
@@ -20,7 +22,8 @@ const ViewDetails = () => {
     const handleClick=()=>{
                         
                   const vehicleDetail={
-                                 
+                         userEmail:user.email,
+                         vehicleId:vehicle._id,        
                        vehicleName:vehicle.vehicleName,
                        ownerName:vehicle.ownerName,
                        category:vehicle.category,
@@ -35,6 +38,17 @@ const ViewDetails = () => {
 
                   axiosInstance.post('/vehicleDetail',vehicleDetail).then(res=>{
                           console.log(res.data);
+
+                          if(res.data.exist){
+                            Swal.fire({
+                                       icon: "error",
+                                       title: "Oops...",
+                                       text: "Vehicle is already booked",
+                                      timer:1500
+                                       });
+
+                                       return;
+                          }
                           if(res.data.insertedId){
                              Swal.fire({
                               title: "Vehicle booking is completed!",
