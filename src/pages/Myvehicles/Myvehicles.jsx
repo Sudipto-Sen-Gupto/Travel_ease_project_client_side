@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { use } from 'react';
+import React, { use, useRef, useState } from 'react';
 import { AuthContext } from '../../component/authprovider/Authprovider';
 import Useaxios from '../../customhook/Useaxios';
 import Swal from 'sweetalert2';
@@ -45,6 +45,15 @@ const Myvehicles = () => {
   }
 });
        }
+
+          
+      const viewModal=useRef()
+      const [viewVehicle,setViewVehicle]=useState(null);
+
+       const handleView=(vehicle)=>{
+             setViewVehicle(vehicle)
+               viewModal.current.showModal();
+       }
     return (
         <div>
            <h1>  all data={myVehicles.length}</h1>
@@ -67,18 +76,23 @@ const Myvehicles = () => {
       {
         myVehicles.map((myvehicle,index)=>{
               
-         return   <tr>
+         return  <>
+                <tr>
         <th>{index+1}</th>
         <td>{myvehicle.vehicleName}</td>
         <td>{myvehicle.location}</td>
         <td>{myvehicle.availability}</td>
         <td>{myvehicle.price}</td>
         <td>
-            <button className='btn btn-primary'>View Details</button>
+            <button className='btn btn-primary' onClick={()=>handleView(myvehicle)}  >View Details</button>
             <button className='btn btn-primary mx-2'>Update</button>
             <button className='btn btn-primary' onClick={()=>handleDelete(myvehicle._id)}>Delete</button>
         </td>
       </tr>
+
+    
+
+         </>
         })
       }
       
@@ -87,6 +101,28 @@ const Myvehicles = () => {
     </tbody>
   </table>
 </div>
+
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+{/* <button className="btn" onClick={()=>document.getElementById('my_modal_5').showModal()}>open modal</button> */}
+
+        <dialog ref={viewModal} className="modal modal-bottom sm:modal-middle">
+  <div className="modal-box">
+            {
+                viewVehicle && <>
+                   <h1>{viewVehicle.vehicleName}</h1>
+                </>
+            }
+      
+
+    <div className="modal-action">
+      <form method="dialog">
+        {/* if there is a button in form, it will close the modal */}
+        <button className="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
         </div>
     );
 };
