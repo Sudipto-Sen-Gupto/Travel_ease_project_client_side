@@ -23,7 +23,9 @@ const ViewDetails = () => {
                         
                   const vehicleDetail={
                          userEmail:user.email,
-                         vehicleId:vehicle._id,        
+                         coverImage:vehicle.coverImage,
+                         vehicleId:vehicle._id,
+                         image:vehicle.coverImage,        
                        vehicleName:vehicle.vehicleName,
                        ownerName:vehicle.ownerName,
                        category:vehicle.category,
@@ -33,7 +35,9 @@ const ViewDetails = () => {
                        transmission:vehicle.transmission,
                        seats:vehicle.seats,
                        availability:vehicle.availability,
-                       description:vehicle.description
+                       location:vehicle.location,
+                       description:vehicle.description,
+                       createdAt:new Date().toLocaleString()
                   }
 
                   axiosInstance.post('/vehicleDetail',vehicleDetail).then(res=>{
