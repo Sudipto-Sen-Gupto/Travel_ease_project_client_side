@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import './nav.css'
 import { AuthContext } from '../authprovider/Authprovider';
@@ -11,8 +11,31 @@ const Navbar = () => {
    const {user,signout}=use(AuthContext)
    console.log(user);
    const handleSignOut=()=>{
-    signout().then(res=>toast("Log out successful")).catch(err=>console.log(err))
+    signout().then(()=>toast("Log out successful")).catch(err=>console.log(err))
    }
+     
+
+     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+    
+    const handleToggle=(checked)=>{
+              // console.log(checked);
+              // const html=document.querySelector('html');
+              // if(checked){
+              //   html.setAttribute("data-theme",'dark')
+              // }
+              // else{
+              //   html.setAttribute('data-theme','light')
+              // }
+
+               setTheme(checked ? "dark" : "light");
+    }
 
   const list =<nav className='space-x-6 flex flex-col gap-5 md:flex-row'>
          <NavLink to={'/'}>Home</NavLink>
@@ -41,6 +64,12 @@ const Navbar = () => {
     </div>
             <div>
               <Logo></Logo>
+               <input
+           onChange={(e)=>handleToggle(e.target.checked)}
+           type="checkbox"
+           defaultChecked={localStorage.getItem('theme') === "dark"}
+           className="toggle mx-5 my-4 bg-amber-300"/>
+
             </div>
   </div>
   <div className="navbar-center hidden lg:flex">
