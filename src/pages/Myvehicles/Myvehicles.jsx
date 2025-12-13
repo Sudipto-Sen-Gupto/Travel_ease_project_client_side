@@ -1,20 +1,23 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { use, useRef, useState } from 'react';
 import { AuthContext } from '../../component/authprovider/Authprovider';
-import Useaxios from '../../customhook/Useaxios';
+
 import Swal from 'sweetalert2';
+import { Link } from 'react-router';
+import UseSecureAxios from '../../customhook/UseSecureAxios';
 
 
 const Myvehicles = () => {
            
        const {user}=use(AuthContext);
 
-       const axiosInstance=Useaxios();
+       
+       const axiosSecureInstance=UseSecureAxios();
 
        const {data:myVehicles=[],refetch}=useQuery({
                  queryKey:['myVehicle',user.email],
                  queryFn:async()=>{
-                         const res=await axiosInstance.get(`/addvehicle/email?email=${user.email}`);
+                         const res=await axiosSecureInstance.get(`/addvehicle/email?email=${user.email}`);
                             console.log(res.data);
                          return res.data
                  } 
@@ -33,7 +36,7 @@ const Myvehicles = () => {
 }).then((result) => {
   if (result.isConfirmed) {
 
-    axiosInstance.delete(`/removevehicle/${id}`).then(()=>{
+   axiosSecureInstance.delete(`/removevehicle/${id}`).then(()=>{
               refetch();    
         Swal.fire({
       title: "Deleted!",
@@ -56,13 +59,13 @@ const Myvehicles = () => {
        }
     return (
         <div>
-           <h1>  all data={myVehicles.length}</h1>
+           <h1 className='text-center text-3xl text-bold my-5'> My vehicle:{myVehicles.length}</h1>
 
              <div className="overflow-x-auto">
-  <table className="  md: table table-zebra ">
+  <table className="  md: table table-zebra text-[20px] ">
     {/* head */}
     <thead>
-      <tr>
+      <tr className='text-[20px]'>
         <th>#</th>
         <th>Vehicle Name</th>
         <th>Location</th>
@@ -76,8 +79,7 @@ const Myvehicles = () => {
       {
         myVehicles.map((myvehicle,index)=>{
               
-         return  <>
-                <tr>
+         return    <tr key={myvehicle._id}>
         <th>{index+1}</th>
         <td>{myvehicle.vehicleName}</td>
         <td>{myvehicle.location}</td>
@@ -85,14 +87,14 @@ const Myvehicles = () => {
         <td>{myvehicle.price}</td>
         <td>
             <button className='btn btn-primary' onClick={()=>handleView(myvehicle)}  >View Details</button>
-            <button className='btn btn-primary mx-2'>Update</button>
+            <Link className='btn btn-primary mx-2' to={'/update'} >Update</Link>
             <button className='btn btn-primary' onClick={()=>handleDelete(myvehicle._id)}>Delete</button>
         </td>
       </tr>
 
     
 
-         </>
+         
         })
       }
       
@@ -109,7 +111,33 @@ const Myvehicles = () => {
   <div className="modal-box">
             {
                 viewVehicle && <>
-                   <h1>{viewVehicle.vehicleName}</h1>
+                  <div className="max-w-xl mx-auto p-6">
+  <div className="card bg-base-100 shadow-xl border rounded-2xl">
+    
+    <div className="card-body space-y-3">
+      <h2 className="card-title text-3xl font-bold text-primary">
+        {viewVehicle.vehicleName}
+      </h2>
+
+      <div className="space-y-1 text-lg">
+        <p><span className="font-semibold">Owner:</span> {viewVehicle.ownerName}</p>
+        <p><span className="font-semibold">Location:</span> {viewVehicle.location}</p>
+        <p><span className="font-semibold">Price:</span> ${viewVehicle.price}</p>
+        <p><span className="font-semibold">Category:</span> {viewVehicle.category}</p>
+        <p><span className="font-semibold">Email:</span> {viewVehicle.email}</p>
+      </div>
+
+      <div className="divider"></div>
+
+      <p className="text-base leading-relaxed">
+        {viewVehicle.description}
+      </p>
+
+      
+    </div>
+  </div>
+                  </div>
+
                 </>
             }
       

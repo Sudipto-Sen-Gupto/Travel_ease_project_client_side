@@ -10,6 +10,7 @@ import Login from '../Login/Login';
 import Register from '../register/Register';
 import Privateroute from '../privaterouter/Privateroute';
 import ViewDetails from '../../pages/viewDetailsPage/ViewDetails';
+import VehicleUpdate from '../../pages/updatePage/vehicleUpdate';
 
 
  export const router = createBrowserRouter([
@@ -31,8 +32,13 @@ import ViewDetails from '../../pages/viewDetailsPage/ViewDetails';
             },
             {
                 path:'myvehicles',
-                element: <Privateroute><Myvehicles></Myvehicles></Privateroute>
+                element: <Privateroute><Myvehicles></Myvehicles></Privateroute>,
+               
             },
+               {
+                     path:'update',
+                     element:<Privateroute><VehicleUpdate></VehicleUpdate></Privateroute>
+                },
             {
                 path:'mybook',
                 element: <Privateroute><Mybooks></Mybooks></Privateroute>

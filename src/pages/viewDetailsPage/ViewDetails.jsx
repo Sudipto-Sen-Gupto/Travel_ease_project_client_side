@@ -1,19 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { use } from 'react';
 import { useParams } from 'react-router';
-import Useaxios from '../../customhook/Useaxios';
+
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../component/authprovider/Authprovider';
+import UseSecureAxios from '../../customhook/UseSecureAxios';
 
 const ViewDetails = () => {
-     const axiosInstance=Useaxios();
+     
+     const axiosSecureInstance=UseSecureAxios();
     const {id}=useParams();
     const {user}=use(AuthContext)
     // console.log(id);
     const {data:vehicle={}}=useQuery({
         queryKey:['viewdetail',id,user.email],
         queryFn:async()=>{
-            const res=await axiosInstance.get(`/viewdetail/${id}`)
+            const res=await axiosSecureInstance.get(`/viewdetail/${id}`)
             console.log(res.data);
             return res.data;
         }
@@ -40,7 +42,7 @@ const ViewDetails = () => {
                        createdAt:new Date().toLocaleString()
                   }
 
-                  axiosInstance.post('/vehicleDetail',vehicleDetail).then(res=>{
+                 axiosSecureInstance.post('/vehicleDetail',vehicleDetail).then(res=>{
                           console.log(res.data);
 
                           if(res.data.exist){

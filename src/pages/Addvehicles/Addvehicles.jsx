@@ -2,13 +2,16 @@ import React, { use } from 'react';
 
 import image2 from '../../assets/homepage_pic/gettyimages-2234313553-1024x1024.jpg'
 import { AuthContext } from '../../component/authprovider/Authprovider';
-import axios from 'axios';
-import Useaxios from '../../customhook/Useaxios';
+
+
 import Swal from 'sweetalert2';
+import UseSecureAxios from '../../customhook/UseSecureAxios';
 const Addvehicles = () => {
 
     const {user}=use(AuthContext);
-    const axiosInstance=Useaxios();
+    // const axiosInstance=Useaxios();
+     const axiosSecureInstance=UseSecureAxios();
+
     const handleSubmit=(e)=>{
         e.preventDefault();
 
@@ -26,7 +29,7 @@ const Addvehicles = () => {
 
         console.log(vehicleInfo);
 
-          axiosInstance.post('/addvehicle',vehicleInfo).then(res=>{
+          axiosSecureInstance.post('/addvehicle',vehicleInfo).then(res=>{
             console.log(res.data);
 
             if(res.data.insertedId){

@@ -1,18 +1,20 @@
 import React, { use } from 'react';
 import { AuthContext } from '../../component/authprovider/Authprovider';
 import { useQuery } from '@tanstack/react-query';
-import Useaxios from '../../customhook/Useaxios';
+
+import UseSecureAxios from '../../customhook/UseSecureAxios';
 
 const Mybooks = () => {
 
     const {user}=use(AuthContext);
-     const axiosInstance=Useaxios(); 
+    
+     const axiosSecureInstance=UseSecureAxios()
 
     const {data:bookings=[]}=useQuery({
              
            queryKey:['vehiclebook',user.email],
            queryFn:async()=>{
-                   const res=await axiosInstance.get(`/vehicleBooking/email?email=${user.email}`)
+                   const res=await axiosSecureInstance.get(`/vehicleBooking/email?email=${user.email}`)
 
                    console.log(res.data);
                    return res.data;
