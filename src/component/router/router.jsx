@@ -11,6 +11,7 @@ import Register from '../register/Register';
 import Privateroute from '../privaterouter/Privateroute';
 import ViewDetails from '../../pages/viewDetailsPage/ViewDetails';
 import VehicleUpdate from '../../pages/updatePage/vehicleUpdate';
+import Errorpage from '../../pages/Errorpage/Errorpage';
 
 
  export const router = createBrowserRouter([
@@ -55,7 +56,11 @@ import VehicleUpdate from '../../pages/updatePage/vehicleUpdate';
     {
         path:'register',
         Component:Register
-    }
+    },
+           {
+            path:'*',
+            Component:Errorpage
+           }
         ]
     }
 ])
