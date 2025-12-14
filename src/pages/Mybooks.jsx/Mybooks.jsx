@@ -3,7 +3,7 @@ import { AuthContext } from '../../component/authprovider/Authprovider';
 import { useQuery } from '@tanstack/react-query';
 
 import UseSecureAxios from '../../customhook/UseSecureAxios';
-
+import { format } from 'date-fns';
 const Mybooks = () => {
 
     const {user}=use(AuthContext);
@@ -23,7 +23,8 @@ const Mybooks = () => {
     return (
         <div>
                 <h1 className='text-3xl font-bold text-center my-5'>My vehicle booking schedule</h1>
-
+                   
+                  <p className='text-center text-[22px] '> {format(new Date(), 'dd MMM yyyy, hh:mm a')}</p>
             <div className="overflow-x-auto">
   <table className="table">
    

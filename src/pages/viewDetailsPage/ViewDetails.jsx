@@ -5,7 +5,7 @@ import { useParams } from 'react-router';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../component/authprovider/Authprovider';
 import UseSecureAxios from '../../customhook/UseSecureAxios';
-
+import { format } from 'date-fns';
 const ViewDetails = () => {
      
      const axiosSecureInstance=UseSecureAxios();
@@ -39,7 +39,8 @@ const ViewDetails = () => {
                        availability:vehicle.availability,
                        location:vehicle.location,
                        description:vehicle.description,
-                       createdAt:new Date().toLocaleString()
+                      //  createdAt:new Date().toLocaleString()
+                      createdAt:  format(new Date(), 'dd MMM yyyy, hh:mm a')
                   }
 
                  axiosSecureInstance.post('/vehicleDetail',vehicleDetail).then(res=>{
