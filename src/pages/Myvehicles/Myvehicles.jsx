@@ -83,11 +83,15 @@ const Myvehicles = () => {
         <th>{index+1}</th>
         <td>{myvehicle.vehicleName}</td>
         <td>{myvehicle.location}</td>
-        <td>{myvehicle.availability}</td>
+        <td  className={` ${
+    myvehicle.availability?.toLowerCase() === 'available'
+      ? 'text-green-600'
+      : 'text-red-600'
+  }`}>{myvehicle.availability}</td>
         <td>{myvehicle.price}</td>
         <td>
             <button className='btn btn-primary' onClick={()=>handleView(myvehicle)}  >View Details</button>
-            <Link className='btn btn-primary mx-2' to={'/update'} >Update</Link>
+            <Link  className='btn btn-primary mx-2' to={`/update/${myvehicle._id}`} >Update</Link>
             <button className='btn btn-primary' onClick={()=>handleDelete(myvehicle._id)}>Delete</button>
         </td>
       </tr>

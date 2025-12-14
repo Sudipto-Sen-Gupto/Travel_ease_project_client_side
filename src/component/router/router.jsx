@@ -36,7 +36,7 @@ import VehicleUpdate from '../../pages/updatePage/vehicleUpdate';
                
             },
                {
-                     path:'update',
+                     path:'update/:id',
                      element:<Privateroute><VehicleUpdate></VehicleUpdate></Privateroute>
                 },
             {
