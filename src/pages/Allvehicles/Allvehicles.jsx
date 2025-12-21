@@ -3,18 +3,23 @@ import Useaxios from '../../customhook/Useaxios';
 import { useQuery } from '@tanstack/react-query';
 import Homedatum from '../../component/homeData/Homedatum';
 import { AuthContext } from '../../component/authprovider/Authprovider';
+import Loadingpage from '../loadingPage/Loadingpage';
 
 const Allvehicles = () => {
 
     const axiosInstance=Useaxios(AuthContext);
 
-    const {data:property=[]}=useQuery({
+    const {data:property=[],isLoading}=useQuery({
         queryKey: ['property'],
         queryFn:async()=>{
             const res=await axiosInstance.get('/allProperty')
             return res.data;
         }
     })
+
+    if(isLoading){
+      return <Loadingpage></Loadingpage>
+    }
     return (
         <div>
               <div className='text-center my-5 p-4'>

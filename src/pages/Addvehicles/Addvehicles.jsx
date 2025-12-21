@@ -56,7 +56,7 @@ const Addvehicles = () => {
              <img src={image2} className='h-full' alt="" />
           </div>
 
-            <div className='bg-[#fefaee] w-full h-full my-auto p-25' >
+            <div className='bg-blue-400 w-full h-full my-auto p-25' >
                 <h1 className='text-3xl font-bold text-center'>Add your vehicle</h1>
              <form onSubmit={handleSubmit} className=''>
                     

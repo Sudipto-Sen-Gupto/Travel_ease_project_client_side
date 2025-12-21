@@ -68,7 +68,7 @@ const Navbar = () => {
            onChange={(e)=>handleToggle(e.target.checked)}
            type="checkbox"
            defaultChecked={localStorage.getItem('theme') === "dark"}
-           className="toggle mx-5 my-4 bg-amber-300"/>
+           className="toggle mx-5 my-4 bg-blue-600"/>
 
             </div>
   </div>
