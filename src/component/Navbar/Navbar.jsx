@@ -5,7 +5,7 @@ import { AuthContext } from '../authprovider/Authprovider';
 import profile from '../../assets/user.png';
 import { toast } from 'react-toastify';
 import Logo from '../logo/Logo';
-
+import backgroundImg from './background.avif'
 const Navbar = () => {
 
    const {user,signout}=use(AuthContext)
@@ -49,7 +49,7 @@ const Navbar = () => {
   </nav>
     return (
         <div>
-            <div className="navbar  shadow-lg   bg-[url('src/assets/Image/background.avif')] bg-cover pb-[300px] text-white">
+            <div className="navbar  shadow-lg  bg-cover pb-[300px] text-white" style={{ backgroundImage: `url(${backgroundImg})` }}>
               
   <div className="navbar-start">
     <div className="dropdown">

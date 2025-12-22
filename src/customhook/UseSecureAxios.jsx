@@ -3,7 +3,7 @@ import React, { use, useEffect } from 'react';
 import { AuthContext } from '../component/authprovider/Authprovider';
  
   const instance=axios.create({
-      baseURL:'http://localhost:3000'
+      baseURL:'https://travel-ease-server-project.vercel.app'
   })
 
 const UseSecureAxios = () => {
