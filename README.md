@@ -1,16 +1,77 @@
-# React + Vite
+# 🚗 Travel Ease – Vehicle Rental Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Travel Ease is a full-stack vehicle rental web application that helps users discover, view, and book vehicles easily. It provides a smooth user experience with modern UI, secure backend, and efficient data handling.
 
-Currently, two official plugins are available:
+🌐 **Live Website:**  
+https://travel-ease-project-client-developed.netlify.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Browse available vehicles with detailed information
+- View vehicle details (price, rating, category, availability)
+- Book vehicles seamlessly
+- Responsive design for all devices
+- Light & Dark theme support
+- Fast data fetching and caching
+- Interactive alerts and notifications
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+### Frontend
+- React
+- React Router DOM
+- TanStack Query (React Query)
+- Tailwind CSS
+- DaisyUI
+- React Toastify
+- SweetAlert2
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+
+---
+
+## 📦 NPM Packages Used
+
+- react
+- react-router-dom
+- @tanstack/react-query
+- react-toastify
+- sweetalert2
+- daisyui
+- tailwindcss
+- express
+- mongodb
+- cors
+- dotenv
+
+---
+
+## 📂 Project Structure
+
+```bash
+travel-ease/
+├── client/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── routes/
+│   │   ├── hooks/
+│   │   └── App.jsx
+│   └── package.json
+│
+├── server/
+│   ├── routes/
+│   ├── controllers/
+│   ├── middleware/
+│   └── index.js
+│
+└── README.md
+
+
