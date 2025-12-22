@@ -50,7 +50,8 @@ https://travel-ease-project-client-developed.netlify.app/
 - mongodb
 - cors
 - dotenv
-
+- date-fns
+- react awesome component
 ---
 
 ## 📂 Project Structure
