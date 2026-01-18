@@ -10,22 +10,29 @@ const Allvehicles = () => {
   const [totalElements, setTotalElements] = useState(0);
   const [page, setPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
-  const [sortOrder,setSortOrder]=useState('asc')
+  const [sortOrder,setSortOrder]=useState('asc');
+  const [search,setSearch]=useState('');
   const axiosInstance = Useaxios(AuthContext);
   const limit = 6;
 
   const { data: property = [], isLoading } = useQuery({
-    queryKey: ['allVehicles', currentPage,sortOrder],
+    queryKey: ['allVehicles', currentPage,sortOrder,search],
     queryFn: async () => {
       const res = await axiosInstance.get(
-        `/allProperty?limit=${limit}&skip=${currentPage * limit}&sort=pricePerDay&order=${sortOrder}`
+        `/allProperty?limit=${limit}&skip=${currentPage * limit}&sort=pricePerDay&order=${sortOrder}&search=${search}`
       );
       
       setTotalElements(res.data.total);
       setPage(Math.ceil(res.data.total / limit));
       return res.data.result;
     }
-  });
+  }); 
+
+  const handleSearch=(e)=>{
+      const searchText=e.target.value;
+      setCurrentPage(0);
+      setSearch(searchText)
+  }
 
   if (isLoading) return <Loadingpage />;
 
@@ -60,16 +67,17 @@ const Allvehicles = () => {
         {/* Search */}
         <div className="join">
           <input
-            className="input join-item input-bordered"
-            placeholder="Search vehicle"
+            className="input join-item input-bordered" value={search}
+            placeholder="Search vehicle" onChange={handleSearch}
           />
-          <button className="btn join-item btn-primary">
-            Search
-          </button>
+          
         </div>
 
         {/* Sort */}
-        <select className="select select-bordered" onChange={(e)=>setSortOrder(e.target.value)}>
+        <select className="select select-bordered" onChange={(e)=>{
+          setSortOrder(e.target.value);
+           setCurrentPage(0)}}>
+
           <option disabled>Sort By</option>
           <option value={'asc'}>Price: Low to High</option>
           <option value={'desc'}>Price: High to Low</option>
