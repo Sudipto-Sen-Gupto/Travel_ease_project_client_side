@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { Eye, EyeOff } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import Googlelog from '../googleLog/Googlelog';
+import DemoLogin from '../AutoLogin/DemoLogin';
 
 const Login = () => {
            
@@ -62,6 +63,7 @@ const Login = () => {
         </form> 
                <p>Create an account? <Link to={'/register'}><span className='text-blue-400 underline'>Register now</span></Link></p>
              <Googlelog></Googlelog>
+              <DemoLogin></DemoLogin>
       </div>
      
     </div>

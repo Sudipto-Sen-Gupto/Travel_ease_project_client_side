@@ -3,8 +3,9 @@ import React from 'react';
 
 const axiosInstance= axios.create({
          
-    //    baseURL: 'https://travel-ease-server-project.vercel.app/',
-       baseURL:'http://localhost:3000/'
+        baseURL: 'https://travel-ease-project-server.vercel.app',
+    //    baseURL: 'http://localhost:3000/',
+      
 })
 
 const Useaxios = () => {

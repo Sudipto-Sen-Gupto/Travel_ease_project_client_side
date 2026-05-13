@@ -12,6 +12,7 @@ import Privateroute from '../privaterouter/Privateroute';
 import ViewDetails from '../../pages/viewDetailsPage/ViewDetails';
 import VehicleUpdate from '../../pages/updatePage/vehicleUpdate';
 import Errorpage from '../../pages/Errorpage/Errorpage';
+import Dashboard from '../../pages/Dashboard/Dashboard';
 
 
  export const router = createBrowserRouter([
@@ -62,5 +63,9 @@ import Errorpage from '../../pages/Errorpage/Errorpage';
             Component:Errorpage
            }
         ]
+    },
+    {
+        path:'/dashboard',
+        Component:Dashboard
     }
 ])

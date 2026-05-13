@@ -4,6 +4,7 @@ import { AuthContext } from '../authprovider/Authprovider';
 import { Link, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import Googlelog from '../googleLog/Googlelog';
+import DemoLogin from '../AutoLogin/DemoLogin';
 
 const Register = () => {
   const {signUpWithUser}=use(AuthContext)
@@ -80,6 +81,7 @@ const Register = () => {
        <p>Have already an account? <Link to={'/login'} className='to-blue-700 underline'>Sign in</Link></p>
 
        <Googlelog></Googlelog>
+       <DemoLogin></DemoLogin>
       </div>
     </div>
   </div>

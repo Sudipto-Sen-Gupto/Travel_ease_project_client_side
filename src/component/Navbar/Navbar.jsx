@@ -125,7 +125,10 @@ const Navbar = () => {
                         defaultChecked={theme === 'dark'}
                         className="toggle toggle-sm bg-orange-500"
                       />
+
+                     
                     </div>
+                     <Link to='/dashboard' >Dashboard</Link>
                   </motion.div>
                 )}
               </AnimatePresence>
